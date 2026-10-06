@@ -1,4 +1,3 @@
-
 "use client";
 
 import Link from "next/link";
@@ -7,6 +6,7 @@ import {
   LayoutDashboard,
   BookOpen,
   MessageSquareText,
+  MessagesSquare,
   History,
   Target,
   Settings,
@@ -52,6 +52,8 @@ export default function Sidebar({
 }: SidebarProps) {
   const pathname = usePathname();
 
+  const chatActive = pathname === "/chat";
+
   return (
     <>
       {open && (
@@ -63,10 +65,13 @@ export default function Sidebar({
 
       <aside
         className={`fixed left-0 top-0 z-50 flex h-screen w-64 flex-col border-r border-[var(--border)] bg-white transition-transform duration-300 lg:translate-x-0 ${
-          open ? "translate-x-0" : "-translate-x-full"
+          open
+            ? "translate-x-0"
+            : "-translate-x-full"
         }`}
       >
         {/* Logo */}
+
         <div className="flex h-20 items-center justify-between border-b border-[var(--border)] px-6">
           <Link
             href="/dashboard"
@@ -95,39 +100,80 @@ export default function Sidebar({
           </button>
         </div>
 
-        {/* Navigation */}
-        <nav className="flex-1 space-y-1 px-3 py-6">
+        {/* Main Navigation */}
+
+        <nav className="flex-1 overflow-y-auto px-3 py-6">
           <p className="px-3 pb-3 text-[11px] font-semibold uppercase tracking-wider text-gray-400">
             Workspace
           </p>
 
-          {menuItems.map((item) => {
-            const Icon = item.icon;
-            const active = pathname === item.href;
+          <div className="space-y-1">
+            {menuItems.map((item) => {
+              const Icon = item.icon;
 
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={onClose}
-                className={`group flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium transition-all duration-200 ${
-                  active
-                    ? "bg-[var(--primary-light)] text-[var(--primary)]"
-                    : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+              const active =
+                pathname === item.href;
+
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  onClick={onClose}
+                  className={`group flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium transition-all duration-200 ${
+                    active
+                      ? "bg-[var(--primary-light)] text-[var(--primary)]"
+                      : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                  }`}
+                >
+                  <Icon
+                    size={19}
+                    className="transition-transform duration-200 group-hover:scale-105"
+                  />
+
+                  {item.name}
+                </Link>
+              );
+            })}
+          </div>
+
+          {/* Chat */}
+
+          <div className="mt-7">
+            <p className="px-3 pb-3 text-[11px] font-semibold uppercase tracking-wider text-gray-400">
+              Community
+            </p>
+
+            <Link
+              href="/chat"
+              onClick={onClose}
+              className={`group flex items-center gap-3 rounded-xl px-3 py-3 text-sm font-medium transition-all duration-200 ${
+                chatActive
+                  ? "bg-[var(--primary-light)] text-[var(--primary)]"
+                  : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+              }`}
+            >
+              <MessagesSquare
+                size={19}
+                className="transition-transform duration-200 group-hover:scale-105"
+              />
+
+              Community Chat
+
+              {/* Online indicator */}
+
+              <span
+                className={`ml-auto h-2 w-2 rounded-full ${
+                  chatActive
+                    ? "bg-[var(--primary)]"
+                    : "bg-green-500"
                 }`}
-              >
-                <Icon
-                  size={19}
-                  className="transition-transform duration-200 group-hover:scale-105"
-                />
-
-                {item.name}
-              </Link>
-            );
-          })}
+              />
+            </Link>
+          </div>
         </nav>
 
         {/* Bottom */}
+
         <div className="border-t border-[var(--border)] p-3">
           <Link
             href="/settings"
@@ -151,5 +197,3 @@ export default function Sidebar({
     </>
   );
 }
-
-
