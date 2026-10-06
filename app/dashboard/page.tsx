@@ -91,21 +91,23 @@ export default function DashboardPage() {
   return (
     <div className="space-y-8">
 
-      {/* Greeting */}
-      <section className="pt-2">
-        <p className="text-sm font-medium text-[var(--primary)]">
-          Today's progress
-        </p>
+{/* Greeting */}
+<section className="pt-2">
+  <p className="text-sm font-medium text-[var(--primary)]">
+    Today's progress
+  </p>
 
-        <h2 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-          Keep the momentum going.
-        </h2>
+  <h2 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+    Learn a little. Improve a lot.
+  </h2>
 
-        <p className="mt-2 max-w-xl text-sm leading-6 text-[var(--muted)]">
-          You don't need to finish everything at once.
-          Just complete today's targets, one question at a time.
-        </p>
-      </section>
+  <p className="mt-2 max-w-xl text-sm leading-6 text-[var(--muted)]">
+    Stay consistent with your daily Q&A targets.
+    Every question you complete brings you one step closer to your goal.
+  </p>
+</section>
+
+
 
       {/* Main progress */}
       <section className="overflow-hidden rounded-3xl bg-[var(--primary)] p-6 text-white shadow-sm sm:p-8">
