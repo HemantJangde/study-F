@@ -165,12 +165,12 @@ export default function ChatPage() {
     // -----------------------------
 
     socket.on(
-      "receive-message",
-      (message: ChatMessage) => {
-        console.log(
-          "New message received:",
-          message
-        );
+       "receive-message",
+  (message: ChatMessage) => {
+    console.log(
+      "🔥 RECEIVE MESSAGE:",
+      message
+    );
 
         // Add message to chat
         setMessages((currentMessages) => {
@@ -445,30 +445,20 @@ export default function ChatPage() {
         <div className="flex items-center gap-2">
           {/* Notification button */}
 
-          {"Notification" in
-            (typeof window !== "undefined"
-              ? window
-              : {}) && (
-            <>
-              {notificationPermission !==
-                "granted" && (
-                <button
-                  type="button"
-                  onClick={
-                    enableNotifications
-                  }
-                  className="flex items-center gap-2 rounded-xl border border-[var(--border)] bg-white px-3 py-2 text-xs font-medium text-gray-600 transition hover:bg-gray-50"
-                  title="Enable notifications"
-                >
-                  <Bell size={16} />
+         {notificationPermission !== "granted" && (
+  <button
+    type="button"
+    onClick={enableNotifications}
+    className="flex items-center gap-2 rounded-xl border border-[var(--border)] bg-white px-3 py-2 text-xs font-medium text-gray-600 transition hover:bg-gray-50"
+    title="Enable notifications"
+  >
+    <Bell size={16} />
 
-                  <span className="hidden sm:inline">
-                    Enable notifications
-                  </span>
-                </button>
-              )}
-            </>
-          )}
+    <span className="hidden sm:inline">
+      Enable notifications
+    </span>
+  </button>
+)}
 
           {/* Community label */}
 
